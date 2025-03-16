@@ -1,19 +1,15 @@
-import { fetchProducts, fetchSubcategories } from "./lib/data";
-import SubCategorySelect from "./subcategory-select";
-import "./ui/global.css";
+import { fetchProductsBySubcategory } from "../../lib/data";
+import "../../ui/global.css";
 
-export default async function Page() {
-  const [products, subcategories] = await Promise.all([
-    fetchProducts(),
-    fetchSubcategories(),
-  ]);
+export default async function Page({ params }: { params: { id: string } }) {
+  const categoryId = parseInt(params.id ?? "1");
+  const products = await fetchProductsBySubcategory(categoryId);
 
   return (
     <main className="flex min-h-screen flex-col p-6 gap-4">
       <h1>Biketastic</h1>
       <h2>Welcome to our web shop!</h2>
 
-      <SubCategorySelect subcategories={subcategories} />
       <div className="products">
         {products.map((t) => (
           <div className="product-card">
