@@ -1,7 +1,7 @@
 import { fetchProductsBySubcategory } from "../../lib/data";
 import "../../ui/global.css";
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page({ params }: any) {
   const { id } = await params;
   const categoryId = parseInt(id ?? "1");
   const products = await fetchProductsBySubcategory(categoryId);
