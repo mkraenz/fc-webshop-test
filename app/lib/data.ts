@@ -288,9 +288,11 @@ export async function fetchSubcategories() {
 export async function fetchProductsBySubcategory(subCategoryId: number) {
   try {
     const data = await sql<DbProduct[]>`
-        SELECT * FROM (select * from production.product
-        where productsubcategoryid is not null
-        and productsubcategoryid = ${subCategoryId})
+        SELECT * FROM (
+          select * from production.product
+          where productsubcategoryid is not null
+          and productsubcategoryid = ${subCategoryId}
+        )
         where sellstartdate < NOW()
         and sellenddate is null
         or sellenddate > NOW()

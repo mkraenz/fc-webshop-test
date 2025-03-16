@@ -20,7 +20,9 @@ const SubCategorySelect: FC<Props> = ({ subcategories }) => {
         }}
       >
         {subcategories.map((subcategory) => (
-          <option value={subcategory.id}>{subcategory.name}</option>
+          <option value={subcategory.id} key={subcategory.id}>
+            {subcategory.name}
+          </option>
         ))}
       </select>
     </div>
