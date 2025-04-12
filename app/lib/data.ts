@@ -315,3 +315,31 @@ export async function fetchProductsBySubcategory(subCategoryId: number) {
     throw new Error("Failed to fetch products table.");
   }
 }
+
+export async function fetchProductWithProductPhotoId(productId: number) {
+  try {
+    const data = await sql<DbProduct[]>`
+    SELECT * FROM production.productproductphoto
+    left join production.product
+    on production.product.productid = production.productproductphoto.productid
+    where production.product.productid = ${productId}
+    `;
+
+    console.log("Data: ", data);
+    const products = data.map((product) => ({
+      id: product.productid,
+      name: product.name,
+      color: product.color,
+      subcategory: {
+        id: product.productsubcategoryid,
+      },
+      productNumber: product.productnumber,
+    }));
+
+    return products ?? [];
+    // return [{ name: "asdf", color: "red" }];
+  } catch (err) {
+    console.error("Database Error:", err);
+    throw new Error("Failed to fetch products table.");
+  }
+}

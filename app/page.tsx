@@ -15,12 +15,14 @@ export default async function Page() {
 
       <SubCategorySelect subcategories={subcategories} />
       <div className="products">
-        {products.map((t) => (
-          <div className="product-card" key={t.id}>
-            <h3 className="product-card-title">{t.name}</h3>
-            <p>Available in {t.color ?? "white"}</p>
-            <button>Add to Cart</button>
-          </div>
+        {products.map((product) => (
+          <a href={`/products/${product.id}`} key={product.id}>
+            <div className="product-card" key={product.id}>
+              <h3 className="product-card-title">{product.name}</h3>
+              <p>Available in {product.color ?? "white"}</p>
+              <button>Add to Cart</button>
+            </div>
+          </a>
         ))}
       </div>
     </main>
