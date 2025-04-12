@@ -20,6 +20,10 @@ export default async function Page({ params }: any) {
           </div>
         ))}
       </div>
+
+      <a href="/">
+        <button>Back to Home</button>
+      </a>
     </main>
   );
 }
